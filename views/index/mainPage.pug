@@ -1,0 +1,112 @@
+extends ../layouts/main-layout.pug
+block content
+  .container.col-12
+    form.d-flex(action="" method="post") 
+      select.from-select.mb-3.rounded-0(style='width:200px;height:30px;' name='seasonId' aria-label="Default select example")   
+        option(selected value='allOffThem') Tümü
+        each season in seasons
+          option(value=`${season.id}`) #{season.name}
+      button.btn.btn-primary.rounded-0.d-flex.align-items-center(style='height:30px' type="submit") Bul 
+    if countOfReceipts > 0
+      if sezon
+        h3.mb-3 #{sezon} sezonuna ait #{countOfReceipts} fiş bulundu
+      else 
+        h3.mb-3 Tüm sezonlara ait #{countOfReceipts} fiş bulundu
+      .row
+        each receipt in receipts
+          .card.p-0.mb-3.col-6
+            .card-header.d-flex.justify-content-between.align-items-center
+              .name #{receipt.name}
+              .d-flex.align-items-center(class='kapsayıcı')
+                .date #{receipt.date}
+                form(action="/deleteReceipt", method="POST") 
+                  input(type='hidden' name='receiptId' value=`${receipt.id}`)
+                  button.btn.shadow-none(type='submit')
+                    i.bi.bi-trash3  
+            .card-body.overflow-auto
+              table.table.mb-0
+                thead
+                  tr
+                    th(scope='col') Tarih
+                    th(scope='col') Mal Adı
+                    th(scope='col') Adet
+                    th(scope='col') Safi
+                    th(scope='col') Fiyat
+                    th(scope='col') Tutar
+                tbody
+                  if `${receipt.malBirAdet}` != 0
+                    tr
+                      td(scope='row') #{receipt.date}
+                      td #{receipt.malBirName}
+                      td #{receipt.malBirAdet}
+                      td #{receipt.malBirSafi}
+                      td #{receipt.malBirFiyat}
+                      td #{receipt.malBirTutar}
+                  if `${receipt.malIkiAdet}` != 0
+                    tr
+                      td(scope='row') #{receipt.date}
+                      td #{receipt.malIkiName}
+                      td #{receipt.malIkiAdet}
+                      td #{receipt.malIkiSafi}
+                      td #{receipt.malIkiFiyat}
+                      td #{receipt.malIkiTutar}
+                  if `${receipt.malUcAdet}` != 0
+                    tr
+                      td(scope='row') #{receipt.date}
+                      td #{receipt.malUcName}
+                      td #{receipt.malUcAdet}
+                      td #{receipt.malUcSafi}
+                      td #{receipt.malUcFiyat}
+                      td #{receipt.malUcTutar}
+                  tr
+                    td.border-bottom-0(colspan='2')
+                    td.border-bottom-0 #{receipt.totalAdet}
+                    td.border-bottom-0(colspan='2') #{receipt.totalSafi}
+                    td.border-bottom-0 #{receipt.totalTutar}
+              #exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      if sezon
+                        h5#exampleModalLabel.modal-title Rapor (#{sezon})
+                      else 
+                        h5#exampleModalLabel.modal-title Rapor (tümü)
+                      button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                    .modal-body
+                      if genelAdet !== 0
+                        table.table
+                          tbody
+                            tr
+                              th Toplam Satılan ürün
+                              td #{genelAdet}
+                            tr
+                              th Toplam Satılan ürün Safi
+                              td #{genelSafi}
+                            tr
+                              th Ortalama Safi
+                              td  #{ortalamaSafi}
+                            tr
+                              th Ortalama Tutar
+                              td  #{ortalamaTutar}
+                            tr
+                              th Ortalama Fiyat
+                              td  #{ortalamaFiyat}
+                            tr
+                              th.border-bottom-0 Genel Bakiye
+                              td.border-bottom-0 #{genelBakiye}
+                      else 
+                        h1 rapor yok          
+            .card-footer.overflow-auto
+              table.table.mb-0
+                tbody
+                  tr
+                    th(scope='col') Ortalama Safi
+                    td  #{receipt.ortalamaSafi}
+                  tr
+                    th.border-bottom-0(scope='col') Ortalama Tutar
+                    td.border-bottom-0  #{receipt.ortalamaTutar}
+    else 
+      if sezon
+        h3 #{sezon} sezonuna ait fiş bulunamadı
+      else 
+        h3 Fiş bulunamadı

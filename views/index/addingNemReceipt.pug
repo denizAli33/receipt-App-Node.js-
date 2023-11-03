@@ -1,0 +1,110 @@
+extends ../layouts/main-layout.pug 
+
+block content
+  .container.col-12
+    form.overflow-auto(action="", method="POST") 
+      table.table.mb-0
+        thead
+          tr
+            th(scope='row') sezon
+            th(scope='row') İsim
+            th(scope='row') Tarih
+            th(scope='col') Mal Adı 
+            th(scope='col') Adet
+            th(scope='col') Safi
+            th(scope='col') Fiyat
+            th(scope='col') Tutar
+        tbody
+          tr
+            td
+              select.from-select(style='width:100%;height:30px;' name='seasonId' aria-label="Default select example")   
+                option(selected) Select
+                each season in seasons
+                  option(value=`${season.id}`) #{season.name}
+            td(style='width: 150px;')
+              input#receiptOwner(style='width:150px;' type='text' name='receiptOwner')
+            td(style='width: 150px;')
+              input#receiptDate(style='width: 150px;' type='date' name='receiptDate')
+            td
+              input#malBirName(style='width:100px;' type="text" value='muz' readonly name='malBirName' tabindex="1000")
+            td
+              input#malBirAdet(style='width:100px;' type='text' name='malBirAdet' value='0')
+            td
+              input#malBirSafi(style='width:100px;' type='text' name='malBirSafi'  value='0')
+            td
+              input#malBirFiyat(style='width:100px;' type='text' name='malBirFiyat'  value='0')
+            td 
+              input#malBirTutar(style='width:100px;' type='text' value='0' readonly name='malBirTutar' tabindex="1000")
+          tr
+            td.border-bottom-0(rowspan='4')
+            td.border-bottom-0(rowspan='3')
+            td.border-bottom-0(rowspan='3')
+            td
+              input#malIkiName(style='width:100px;' type="text" value='muz ikinci' readonly name='malIkiName' tabindex="1000")
+            td
+              input#malIkiAdet(style='width:100px;' type='text' name='malIkiAdet' value='0')
+            td
+              input#malIkiSafi(style='width:100px;' type='text' name='malIkiSafi' value='0')
+            td
+              input#malIkiFiyat(style='width:100px;' type='text' name='malIkiFiyat' value='0')
+            td 
+              input#malIkiTutar(style='width:100px;' type='text' value='0' readonly name='malIkiTutar' tabindex="1000")
+          tr
+            td 
+              input#malUcName(style='width:100px;' type="text" value='muz yerli' readonly name='malUcName' tabindex="1000")
+            td
+              input#malUcAdet(style='width:100px;' type='text' name='malUcAdet' value='0')
+            td
+              input#malUcSafi(style='width:100px;' type='text' name='malUcSafi' value='0')
+            td
+              input#malUcFiyat(style='width:100px;' type='text' name='malUcFiyat' value='0')
+            td 
+              input#malUcTutar(style='width:100px;' type="text" value='0' readonly name='malUcTutar' tabindex="1000")
+          tr
+            td 
+            td 
+              input#totalAdet(style='width:100px;' type="text" value='0' readonly name='totalAdet' tabindex="1000")
+            td
+              input#totalSafi(style='width:100px;' type="text" value='0' readonly name='totalSafi' tabindex="1000") 
+            td 
+            td 
+              input#totalTutar(style='width:100px;' type="text" value='0' readonly name='totalTutar' tabindex="1000")
+          tr 
+            td.border-bottom-0(colspan='2')
+            td.border-bottom-0(colspan='5')
+              button.btn.btn-warning.col-12.shadow.none#calculateReceipts(type="button") calculate
+          tr
+            td.border-bottom-0(colspan='8')
+              button(type="submit").btn.btn-success.col-12.shadow-none#saveReceipts save 
+    #exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Rapor (tümü)
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            if genelAdet !== 0
+              table.table
+                tbody
+                  tr
+                    th Toplam Satılan ürün
+                    td #{genelAdet}
+                  tr
+                    th Toplam Satılan ürün Safi
+                    td #{genelSafi}
+                  tr
+                    th Ortalama Safi
+                    td  #{ortalamaSafi}
+                  tr
+                    th Ortalama Tutar
+                    td  #{ortalamaTutar}
+                  tr
+                    th Ortalama Fiyat
+                    td  #{ortalamaFiyat}
+                  tr
+                    th.border-bottom-0 Genel Bakiye
+                    td.border-bottom-0 #{genelBakiye}
+            else 
+              h1 rapor yok  
+block script
+  script(src="/js/script.js") 
