@@ -1,0 +1,28 @@
+extends ../layouts/main-layout.pug 
+block styles 
+  link(rel='stylesheet' href='./css/loginPage.css')
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0')
+
+block content
+  section
+    .form-area
+      .form-value
+        form(action='')
+          h2 Sign Up
+          .input-area
+            span.material-symbols-outlined person
+            input#signup-User-Name(type='text' name='signup-User-Name' required='')
+            label(for='signup-User-Name') User Name
+          .input-area
+            span.material-symbols-outlined mail
+            input#signup-User-Email(type='text' name='signup-User-Email' required='')
+            label(for='signup-User-Email') User Mail
+          .input-area
+            span.material-symbols-outlined lock
+            input#signup-password(type='password' name='signup-password' required='')
+            label(for='signup-password') Password
+          .input-area
+            span.material-symbols-outlined lock
+            input#signup-re-password(type='password' name='signup-re-password' required='')
+            label(for='signup-re-password') Re-Password
+          button.login-botton(type='submit') Sign Up

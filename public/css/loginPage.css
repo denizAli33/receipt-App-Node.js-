@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: url(../image/background-3.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.form-area {
+    padding: 25px 0;
+    position: relative;
+    width: 400px;
+    height: auto;
+    background: transparent;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h2 {
+    font-size: 2em;
+    text-align: center;
+    color: #fff;
+}
+.input-area {
+    position: relative;
+    width: 310px;
+    margin: 30px 0;
+    border-bottom: 2px solid #fff;
+}
+.input-area label {
+    position: absolute;
+    color: #fff;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-area span {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    color: #fff;
+    pointer-events: none;
+}
+.input-area input {
+    height: 50px;
+    padding: 0 35px 0 5px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    background: transparent;
+}
+input:valid ~ label,
+input:focus ~ label{
+    top: -5px;
+    font-size: .9em;
+    color: rgba(255, 255, 255, .8);
+}
+.forget {
+    display: flex;
+    margin: -10px 5px 15px 5px ;
+    justify-content: center;
+}
+.forget a {
+    text-decoration: none;
+    color: #fff;
+    font-size: .9em;
+    transition: .5s;
+}
+.forget a:hover {
+    text-decoration: underline;
+    scale: 1.1;
+}
+button.login-botton {
+    width: 100%;
+    height: 40px;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    pointer-events: all;
+    cursor: pointer;
+    transition: all ease 200;
+}
+button:hover{
+    scale: 1.01;
+}
+.register {
+    text-align: center;
+    color: #fff;
+    font-size: .9em;
+}
+.register p a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;    
+}
+.register p a:hover {
+    text-decoration: underline;
+    scale: 1.2;
+}

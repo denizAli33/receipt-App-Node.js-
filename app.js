@@ -320,6 +320,12 @@ app.post('/addingNewSeason', (req, res) => {
         .then(()=>{res.redirect('/')})
         .catch((err)=>{console.log(err)})
 })
+app.get('/login',(req, res) => {
+    res.render('index/loginPage');
+})
+app.get('/signup',(req, res) => {
+    res.render('index/signupPage');
+})
 Receipt.belongsTo(Season);
 Season.hasMany(Receipt);
 sequelize
