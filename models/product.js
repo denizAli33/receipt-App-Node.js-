@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../utility/database');
 
-const Receipt = sequelize.define('receipt', {
+const Product = sequelize.define('product', {
     id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -9,8 +9,10 @@ const Receipt = sequelize.define('receipt', {
         primaryKey: true
     },
 
-    name:Sequelize.STRING,
-    date:Sequelize.STRING
+    malName:Sequelize.STRING,
+    malAdet:Sequelize.INTEGER,
+    malSafi:Sequelize.FLOAT,
+    malFiyat:Sequelize.FLOAT
 });
 
-module.exports= Receipt;
+module.exports= Product;

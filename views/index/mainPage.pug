@@ -15,6 +15,9 @@ block content
       .row
         each receipt in receipts
           .card.p-0.mb-3.col-6
+            - var totalAdet = 0
+            - var totalSafi = 0
+            - var totalTutar = 0
             .card-header.d-flex.justify-content-between.align-items-center
               .name #{receipt.name}
               .d-flex.align-items-center(class='kapsayıcı')
@@ -34,35 +37,22 @@ block content
                     th(scope='col') Fiyat
                     th(scope='col') Tutar
                 tbody
-                  if `${receipt.malBirAdet}` != 0
+                  for nesne in ayrilmisNesneler[receipt.id]
+                    - totalAdet += nesne.malAdet 
+                    - totalSafi += nesne.malSafi
+                    - totalTutar += nesne.malSafi * nesne.malFiyat
                     tr
                       td(scope='row') #{receipt.date}
-                      td #{receipt.malBirName}
-                      td #{receipt.malBirAdet}
-                      td #{receipt.malBirSafi}
-                      td #{receipt.malBirFiyat}
-                      td #{receipt.malBirTutar}
-                  if `${receipt.malIkiAdet}` != 0
-                    tr
-                      td(scope='row') #{receipt.date}
-                      td #{receipt.malIkiName}
-                      td #{receipt.malIkiAdet}
-                      td #{receipt.malIkiSafi}
-                      td #{receipt.malIkiFiyat}
-                      td #{receipt.malIkiTutar}
-                  if `${receipt.malUcAdet}` != 0
-                    tr
-                      td(scope='row') #{receipt.date}
-                      td #{receipt.malUcName}
-                      td #{receipt.malUcAdet}
-                      td #{receipt.malUcSafi}
-                      td #{receipt.malUcFiyat}
-                      td #{receipt.malUcTutar}
+                      td #{nesne.malName}
+                      td #{nesne.malAdet}
+                      td #{(nesne.malSafi).toFixed(2)}
+                      td #{nesne.malFiyat}
+                      td #{(nesne.malSafi * nesne.malFiyat).toFixed(2)}
                   tr
                     td.border-bottom-0(colspan='2')
-                    td.border-bottom-0 #{receipt.totalAdet}
-                    td.border-bottom-0(colspan='2') #{receipt.totalSafi}
-                    td.border-bottom-0 #{receipt.totalTutar}
+                    td.border-bottom-0 #{totalAdet}
+                    td.border-bottom-0(colspan='2') #{totalSafi}
+                    td.border-bottom-0 #{totalTutar.toFixed(2)}
               #exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
                 .modal-dialog
                   .modal-content
@@ -101,10 +91,10 @@ block content
                 tbody
                   tr
                     th(scope='col') Ortalama Safi
-                    td  #{receipt.ortalamaSafi}
+                    td  #{(totalSafi / totalAdet).toFixed(2)}
                   tr
                     th.border-bottom-0(scope='col') Ortalama Tutar
-                    td.border-bottom-0  #{receipt.ortalamaTutar}
+                    td.border-bottom-0  #{(totalTutar / totalAdet).toFixed(2)}
     else 
       if sezon
         h3 #{sezon} sezonuna ait fiş bulunamadı
